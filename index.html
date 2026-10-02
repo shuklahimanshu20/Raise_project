@@ -26,6 +26,7 @@
   var FULL = /^\s*\{\{([^}]+)\}\}\s*$/;
   var ANY = /\{\{([^}]+)\}\}/g;
   var ATTR = { 'class': 'className', 'for': 'htmlFor', autocomplete: 'autoComplete', tabindex: 'tabIndex', readonly: 'readOnly', maxlength: 'maxLength' };
+  var EVENTS = { onkeydown: 'onKeyDown', onkeyup: 'onKeyUp', onmousedown: 'onMouseDown', onmouseup: 'onMouseUp', onmouseenter: 'onMouseEnter', onmouseleave: 'onMouseLeave', ondoubleclick: 'onDoubleClick' };
 
   function get(scope, path) {
     path = path.trim();
@@ -98,7 +99,8 @@
       var name = n.attributes[a].name, raw = n.attributes[a].value;
       if (name.indexOf('hint-') === 0) continue;
       var v = raw.indexOf('{{') >= 0 ? val(raw, scope) : raw;
-      if (/^on[a-z]+$/.test(name)) name = 'on' + name.charAt(2).toUpperCase() + name.slice(3);
+      if (EVENTS[name]) name = EVENTS[name];
+      else if (/^on[a-z]+$/.test(name)) name = 'on' + name.charAt(2).toUpperCase() + name.slice(3);
       else if (ATTR[name]) name = ATTR[name];
       if (name === 'style') v = parseStyle(v);
       props[name] = v;
