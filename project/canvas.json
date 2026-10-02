@@ -1,0 +1,23 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-02T10:00:00Z"},
+  "title": "Raise",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 390, "h": 844, "title": "Prototype — start here (cover)", "is_interactive": true, "radius": 44},
+    "Login.dc.html": {"x": 470, "y": 0, "w": 390, "h": 844, "title": "Log in", "is_interactive": true, "radius": 44},
+    "Signup.dc.html": {"x": 940, "y": 0, "w": 390, "h": 844, "title": "Sign up", "is_interactive": true, "radius": 44},
+    "Prep.dc.html": {"x": 1410, "y": 0, "w": 390, "h": 844, "title": "Prep guide · Anticipate", "is_interactive": true, "radius": 44},
+    "Talk.dc.html": {"x": 1880, "y": 0, "w": 390, "h": 844, "title": "Go talk · Pocket card", "is_interactive": true, "radius": 44},
+    "Reflect.dc.html": {"x": 2350, "y": 0, "w": 390, "h": 844, "title": "Reflect", "is_interactive": true, "radius": 44},
+    "Insight.dc.html": {"x": 2820, "y": 0, "w": 390, "h": 844, "title": "Insight & next talk", "is_interactive": true, "radius": 44},
+    "Home.dc.html": {"x": 3290, "y": 0, "w": 390, "h": 844, "title": "Home · the cycle", "is_interactive": true, "radius": 44}
+  },
+  "order": ["Main.dc.html", "Login.dc.html", "Signup.dc.html", "Prep.dc.html", "Talk.dc.html", "Reflect.dc.html", "Insight.dc.html", "Home.dc.html"],
+  "notes": {
+    "flowtitle": {"x": 0, "y": -300, "text": "Raise — prepare · talk · reflect · next", "kind": "title1", "maxW": 3680},
+    "howto": {"x": 3760, "y": 0, "w": 300, "maxH": 460, "fill": "green", "text": "Every screen is live. Press Play on “Prototype — start here” to walk the whole journey:\n\nCover → Get started → Log in (or Create a parent account / Forgot password) → teen’s age → topic → what feels hard → 5-minute prep guide → go talk (offline) → reflect → next conversation.\n\nAny username + password logs in. The other frames open the same prototype mid-journey with a sample parent (Arjun) and teen (Maya)."}
+  },
+  "designSystems": []
+}
