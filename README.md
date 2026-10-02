@@ -5,7 +5,7 @@ Opportunity: Help Parents Build a Friendly, Trust-Based Relationship with Their 
 
 Raise helps parents prepare for difficult conversations with their teenager, have them offline, reflect, and plan the next one.
 
-Live prototype: https://claude.ai/artifact/PwLRaJeqyRpv3RyhvtAB5C (press Play on "Prototype — start here")
+Live prototype: https://shuklahimanshu20.github.io/Raise_project/
 
 ## Flow
 Cover → Get started → Log in (username + password) / Create a parent account / Forgot password
@@ -17,4 +17,4 @@ Cover → Get started → Log in (username + password) / Create a parent account
 - `Login`, `Signup`, `Prep`, `Talk`, `Reflect`, `Insight`, `Home` `.dc.html` — frames that open the prototype at that screen with sample data
 - `canvas.json` — canvas layout
 
-These are Design Component files rendered by the Design canvas runtime (`support.js`), so open them through the link above rather than directly in a browser.
+`index.html` renders `project/Main.dc.html` in the browser with React. To run locally, serve the folder (for example `python -m http.server`) and open http://localhost:8000. Jump to a screen with `?screen=home&demo=1` or `?screen=prep&step=2&demo=1`.

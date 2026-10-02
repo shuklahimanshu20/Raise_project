@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E4D3B">
+<meta name="description" content="Raise helps parents prepare for the conversations that matter with their teens.">
+<title>Raise</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #E4E9E3; font-family: system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #phone { width: 390px; height: 844px; flex: none; border-radius: 44px; overflow: hidden; background: #F2F4EF;
+           box-shadow: 0 0 0 10px #15201A, 0 30px 80px rgba(21, 32, 26, 0.3); transform-origin: center center; }
+  body.mobile { background: #F2F4EF; }
+  body.mobile #phone { border-radius: 0; box-shadow: none; }
+  #msg { padding: 40px 28px; color: #15201A; font-size: 15px; line-height: 1.5; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+<div id="stage"><div id="phone"><div id="msg">Loading Raise…</div></div></div>
+<script>
+(function () {
+  var h = React.createElement;
+  var FULL = /^\s*\{\{([^}]+)\}\}\s*$/;
+  var ANY = /\{\{([^}]+)\}\}/g;
+  var ATTR = { 'class': 'className', 'for': 'htmlFor', autocomplete: 'autoComplete', tabindex: 'tabIndex', readonly: 'readOnly', maxlength: 'maxLength' };
+
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    return path.split('.').reduce(function (o, k) { return o == null ? undefined : o[k]; }, scope);
+  }
+  function interp(str, scope) {
+    return str.replace(ANY, function (m, p) { var v = get(scope, p); return v == null ? '' : String(v); });
+  }
+  function val(str, scope) {
+    var m = str.match(FULL);
+    return m ? get(scope, m[1]) : interp(str, scope);
+  }
+  function parseStyle(s) {
+    var o = {};
+    String(s).split(';').forEach(function (d) {
+      var i = d.indexOf(':');
+      if (i < 0) return;
+      var k = d.slice(0, i).trim(), v = d.slice(i + 1).trim();
+      if (!k) return;
+      if (k.indexOf('--') !== 0) {
+        k = k.replace(/^-(webkit|moz|ms)-/, function (m, p) { return p.charAt(0).toUpperCase() + p.slice(1) + '-'; });
+        k = k.replace(/-([a-z])/g, function (m, c) { return c.toUpperCase(); });
+      }
+      o[k] = v;
+    });
+    return o;
+  }
+
+  function renderNodes(nodes, scope) {
+    var out = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var r = renderNode(nodes[i], scope, i);
+      if (r != null) out.push(r);
+    }
+    return out;
+  }
+
+  function renderNode(n, scope, key) {
+    if (n.nodeType === 3) {
+      var t = n.nodeValue;
+      if (/^\s*$/.test(t) && t.indexOf('\n') >= 0) return null;
+      return t.indexOf('{{') >= 0 ? interp(t, scope) : t;
+    }
+    if (n.nodeType !== 1) return null;
+    var tag = n.localName;
+    var kids = Array.prototype.slice.call(n.childNodes);
+
+    if (tag === 'helmet') return null;
+    if (tag === 'sc-if') {
+      return val(n.getAttribute('value') || '', scope)
+        ? h.apply(null, [React.Fragment, { key: key }].concat(renderNodes(kids, scope)))
+        : null;
+    }
+    if (tag === 'sc-for') {
+      var list = val(n.getAttribute('list') || '', scope) || [];
+      var as = n.getAttribute('as') || 'item';
+      return h(React.Fragment, { key: key }, list.map(function (it, idx) {
+        var sc = Object.create(scope);
+        sc[as] = it;
+        sc.$index = idx;
+        return h.apply(null, [React.Fragment, { key: idx }].concat(renderNodes(kids, sc)));
+      }));
+    }
+
+    var props = { key: key };
+    for (var a = 0; a < n.attributes.length; a++) {
+      var name = n.attributes[a].name, raw = n.attributes[a].value;
+      if (name.indexOf('hint-') === 0) continue;
+      var v = raw.indexOf('{{') >= 0 ? val(raw, scope) : raw;
+      if (/^on[a-z]+$/.test(name)) name = 'on' + name.charAt(2).toUpperCase() + name.slice(3);
+      else if (ATTR[name]) name = ATTR[name];
+      if (name === 'style') v = parseStyle(v);
+      props[name] = v;
+    }
+    if ((tag === 'input' || tag === 'textarea') && 'value' in props && props.value == null) props.value = '';
+    if (tag === 'textarea') return h(tag, props);
+    return h.apply(null, [tag, props].concat(renderNodes(kids, scope)));
+  }
+
+  function fail(text) {
+    document.getElementById('phone').innerHTML = '';
+    var d = document.createElement('div');
+    d.id = 'msg';
+    d.textContent = text;
+    document.getElementById('phone').appendChild(d);
+  }
+
+  function fit() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var mobile = vw < 500;
+    document.body.classList.toggle('mobile', mobile);
+    var s = mobile ? Math.min(vw / 390, vh / 844) : Math.min(1, (vh - 48) / 864, (vw - 48) / 410);
+    document.getElementById('phone').style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  fetch('project/Main.dc.html').then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  }).then(function (text) {
+    var doc = new DOMParser().parseFromString(text, 'text/html');
+    var root = doc.querySelector('x-dc');
+    var helmet = root.querySelector('helmet');
+    if (helmet) {
+      Array.prototype.slice.call(helmet.children).forEach(function (el) {
+        document.head.appendChild(document.importNode(el, true));
+      });
+    }
+    var scriptEl = doc.querySelector('script[data-dc-script]');
+    var nodes = Array.prototype.slice.call(root.childNodes);
+
+    var DCLogic = function (props) { React.Component.call(this, props); this.state = null; };
+    DCLogic.prototype = Object.create(React.Component.prototype);
+    DCLogic.prototype.constructor = DCLogic;
+    DCLogic.prototype.render = function () { return h.apply(null, [React.Fragment, null].concat(renderNodes(nodes, this.renderVals()))); };
+
+    var Component = new Function('DCLogic', 'React', scriptEl.textContent + '\nreturn Component;')(DCLogic, React);
+
+    var q = new URLSearchParams(location.search);
+    var props = {
+      startScreen: q.get('screen') || 'welcome',
+      startStep: Number(q.get('step') || 0),
+      demo: q.get('demo') === '1'
+    };
+    var mount = document.getElementById('phone');
+    mount.innerHTML = '';
+    ReactDOM.createRoot(mount).render(h(Component, props));
+  }).catch(function (e) {
+    fail('Raise could not load (' + e.message + '). Open this page from a web server such as GitHub Pages, not directly from disk.');
+  });
+})();
+</script>
+</body>
+</html>
