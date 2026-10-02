@@ -1,95 +1,113 @@
 {
   "v": 3,
-  "createdOnFiles": {
-    "v": 1,
-    "at": "2026-10-02T10:00:00Z"
+  "attachments": {},
+  "boards": {
+    "Home.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Home · the cycle",
+      "w": 390,
+      "x": 3760,
+      "y": 0
+    },
+    "Insight.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Insight & next talk",
+      "w": 390,
+      "x": 3290,
+      "y": 0
+    },
+    "Login.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Log in",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Prototype — start here (cover)",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "Prep.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Prep guide · Anticipate",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "Reflect.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Reflect",
+      "w": 390,
+      "x": 2820,
+      "y": 0
+    },
+    "Signup.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Sign up",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "Talk.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Go talk · Pocket card",
+      "w": 390,
+      "x": 2350,
+      "y": 0
+    },
+    "Chat.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 44,
+      "title": "Raise AI · customize the guide",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    }
   },
-  "title": "Raise",
+  "createdOnFiles": {
+    "at": "2026-10-02T10:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
   "launch": {
     "view": "canvas"
   },
-  "pages": [],
-  "boards": {
-    "Main.dc.html": {
+  "notes": {
+    "flowtitle": {
+      "kind": "title1",
+      "maxW": 4150,
+      "text": "Raise — prepare · talk · reflect · next",
+      "w": 240,
       "x": 0,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Prototype — start here (cover)",
-      "is_interactive": true,
-      "radius": 44
+      "y": -300
     },
-    "Login.dc.html": {
-      "x": 470,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Log in",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Signup.dc.html": {
-      "x": 940,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Sign up",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Prep.dc.html": {
-      "x": 1410,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Prep guide · Anticipate",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Talk.dc.html": {
-      "x": 2350,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Go talk · Pocket card",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Reflect.dc.html": {
-      "x": 2820,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Reflect",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Insight.dc.html": {
-      "x": 3290,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Insight & next talk",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Home.dc.html": {
-      "x": 3760,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Home · the cycle",
-      "is_interactive": true,
-      "radius": 44
-    },
-    "Chat.dc.html": {
-      "x": 1880,
-      "y": 0,
-      "w": 390,
-      "h": 844,
-      "title": "Raise AI · customize the guide",
-      "is_interactive": true,
-      "radius": 44
+    "howto": {
+      "fill": "green",
+      "maxH": 460,
+      "text": "Every screen is live. Press Play on “Prototype — start here” to walk the whole journey:\n\nCover → Get started → Log in (or Create a parent account / Forgot password) → teen’s age → topic → what feels hard → 5-minute guide written by Raise AI → chat with Raise AI to customize it → go talk (offline) → reflect → next conversation.\n\nAny username + password logs in. The other frames open the same prototype mid-journey with a sample parent (Arjun) and teen (Maya).",
+      "w": 300,
+      "x": 4230,
+      "y": 0
     }
   },
   "order": [
@@ -103,22 +121,6 @@
     "Insight.dc.html",
     "Home.dc.html"
   ],
-  "notes": {
-    "flowtitle": {
-      "x": 0,
-      "y": -300,
-      "text": "Raise — prepare · talk · reflect · next",
-      "kind": "title1",
-      "maxW": 4150
-    },
-    "howto": {
-      "x": 4230,
-      "y": 0,
-      "w": 300,
-      "maxH": 460,
-      "fill": "green",
-      "text": "Every screen is live. Press Play on “Prototype — start here” to walk the whole journey:\n\nCover → Get started → Log in (or Create a parent account / Forgot password) → teen’s age → topic → what feels hard → 5-minute guide written by Raise AI → chat with Raise AI to customize it → go talk (offline) → reflect → next conversation.\n\nAny username + password logs in. The other frames open the same prototype mid-journey with a sample parent (Arjun) and teen (Maya)."
-    }
-  },
-  "designSystems": []
+  "pages": [],
+  "title": "Raise"
 }
